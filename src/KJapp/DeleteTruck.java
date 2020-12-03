@@ -3,43 +3,53 @@ package KJapp;
 import java.sql.*;
 public class DeleteTruck {
 
-public void DelTruck(Integer truckID){
+public static int DelTruck(int truckID){
 
+  final String USER= "root";
+  final String PASS="";
 
-    //public static void main(String[] args) {
-        try {
-            // create the mysql database connection
-            final String USER = "root";
-            final String PASS = "";
+  final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+  final String DB_URL = "jdbc:mysql://localhost/kjtrucking"; 
 
-            final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-            final String DB_URL = "jdbc:mysql://localhost/kjtrucking";
-
-            Connection conn = null;
-            Statement stmt = null;
-
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            stmt = conn.createStatement();
-
+  Connection conn = null;
+  Statement stmt = null;
+  int status=0;
+  try{
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      stmt = conn.createStatement();
             // create the mysql delete statement.
 
-            String query = "delete from Trucks where id = ?";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-            preparedStmt.setInt(1, truckID);
+      String query = "Delete FROM TRUCK where truck_id = ?";
+      PreparedStatement preparedStmt = conn.prepareStatement(query);
+      preparedStmt.setInt(1, truckID);
 
       // execute the preparedstatement
-      preparedStmt.execute();
+      status= preparedStmt.executeUpdate();
       
-      conn.close();
-    }
-    catch (Exception e)
-    {
-      System.err.println("ERROR! ");
-      System.err.println(e.getMessage());
-    }
-
-  }
-}
-//}
     
+    }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+  }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+  }finally{
+      //finally block used to close resources
+      try{
+          if(stmt!=null)
+              stmt.close();
+      }catch(SQLException se2){
+      }// nothing we can do
+      try{
+          if(conn!=null)
+              conn.close();
+      }catch(SQLException se){
+          se.printStackTrace();
+      }//end finally try
+  }
+  return status;
+}
+ 
+
+}
