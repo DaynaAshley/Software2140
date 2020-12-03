@@ -56,9 +56,8 @@ public class KJDatabase {
                     " side_wage DOUBLE not NULL, " +
                     " side_wage2 DOUBLE not NULL, "+
                     " delivery_price DOUBLE not NULL, "+
-                    " billing_cycle INTEGER not NULL, "+
-                    " PRIMARY KEY ( company_name ))"; 
-                
+                    " billing_cycle INTEGER not NULL) ";
+
                 String sql4 = "CREATE TABLE CALROUTES" +
                     "(company_name VARCHAR(255), " +
                     " destination_name VARCHAR(255), " + 
