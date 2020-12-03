@@ -19,7 +19,7 @@ public class UpdateTruck {
             stmt = conn.createStatement();
          
             
-            final String sql2 = "Update PASSWORD Set truck_Make=?, truck_Model=?, truck_Lisc=?, fitness_Exp=?, registration_Exp=?, insurance_Exp=?  Where truck_ID=?";
+            final String sql2 = "Update TRUCK Set make=?, model=?, license_num=?, fitness_expdate=?, registration_expdate=?, insurance_expdate=?  Where truck_id=?";
             final PreparedStatement prep= conn.prepareStatement(sql2);
             prep.setString(1, newTruckMake);
             prep.setString(2, newTruckModel);
@@ -27,6 +27,7 @@ public class UpdateTruck {
             prep.setString(4, newTruckFitness);
             prep.setString(5, newTruckReg);
             prep.setString(6, newTruckIns);
+            prep.setString(7, newTruckID);
             prep.executeUpdate();
 
         }catch(final SQLException se){
