@@ -23,8 +23,8 @@ public class ExpirationNotif {
     }
          
 
- public static void main(String [] args){  
-   User us=new User("fname", "lname", "email", "dob", "telnum", 5,"pasw");
+ public static void Email(User us){  
+  
   String to= us.getEmailAddress();  
   final String user= us.getEmailAddress(); 
   final String password=us.getPassword(); 
