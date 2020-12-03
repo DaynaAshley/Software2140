@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 public class TextUI {
@@ -15,12 +16,10 @@ public class TextUI {
         this.scan= new Scanner(System.in);
     }
  
-    public boolean login(){
+    public boolean login() throws InterruptedException {
         boolean value;
-        System.out.println("\n======-======-=====-====-===-----------KJ TRUCKING------------===-====-=====-=====-====\n");
-        System.out.println("\n\n\n\n\n\n\n\nWelcome...");
-    
-        System.out.println("\n=====-=====-=====-===----------------- LOGIN -----------------====-=====-====-=====\n");
+        System.out.println("\n======-======-=====-====-===-----------KJ TRUCKING------------===-====-=====-=====-====\n");    
+        System.out.println("\n=====-=====-=====-===------------------ LOGIN -----------------====-=====-====-=====\n");
         System.out.print("\t\tID number: ");
         int id=scan.nextInt();
         scan.nextLine();
@@ -28,12 +27,14 @@ public class TextUI {
         System.out.print("\t\tPassword: ");
         String password=scan.next();
         value= DataValidation.passwordCheck(id, password);
+        TimeUnit.SECONDS.sleep(2);
+        clrs();
         return value;
     }
 
-    public int loginAdmin(){
-        System.out.println("\n-----------KJ TRUCKING-------------\n");
-        System.out.println("\n--------------LOGIN----------------\n");
+    public int loginAdmin() throws InterruptedException {
+        System.out.println("\n======-======-=====-====-===-----------KJ TRUCKING------------===-====-=====-=====-====\n");    
+        System.out.println("\n=====-=====-=====-===------------------ LOGIN -----------------====-=====-====-=====\n");
         System.out.print("ID number: ");
         int id=scan.nextInt();
         scan.nextLine();
@@ -41,11 +42,14 @@ public class TextUI {
         System.out.print("Password: ");
         String password=scan.next();
         int value=DataValidation.AdminpasswordCheck(id, password);
+        TimeUnit.SECONDS.sleep(1);
+        clrs();
         return value;
+        
     }
 
 
-    public void go(){
+    public void go() throws InterruptedException {
         KJDatabase.Connect();
         boolean v=login();
         if (v){
@@ -69,13 +73,13 @@ public class TextUI {
     }
 
 
-    public void Menu(){
+    public void Menu() throws InterruptedException {
         String choice="";
      
         while(!choice.equals("6"))
         {
             
-            System.out.println("\n-------------KJ TRUCKING------------\n\n");
+            System.out.println("\n======-======-=====-====-===-----------KJ TRUCKING------------===-====-=====-=====-====\n");    
             System.out.println("1. User Management");
             System.out.println("2. Driver Management"); 
             System.out.println("3. Route Management");
@@ -91,18 +95,32 @@ public class TextUI {
                 case "1":
                     clrs();
                     UserManagement();
+                    TimeUnit.SECONDS.sleep(5);
+                    clrs();
                     break;
                 
                 case "2":
                      DriverManagement();
+                     TimeUnit.SECONDS.sleep(5);
+                    clrs();
                     break;
                 
                 case "3":
                     RouteManagement();
+                    TimeUnit.SECONDS.sleep(5);
+                    clrs();
+                    break;
+                
+                case "4":
+                    TruckManagement();
+                    TimeUnit.SECONDS.sleep(5);
+                    clrs();
                     break;
 
                 case "5":
                     ReportManagement();
+                    TimeUnit.SECONDS.sleep(5);
+                    clrs();
                     break;
 
                 case "6":
@@ -113,7 +131,7 @@ public class TextUI {
         }
     }
 
-    public void UserManagement(){
+    public void UserManagement() throws InterruptedException {
         String choice="";
      
         int value=loginAdmin();
@@ -124,7 +142,7 @@ public class TextUI {
         }
         else{
             while(!choice.equals("5")){
-                System.out.println("\n-------------USER MANAGEMENT------------\n");
+                System.out.println("\n=====-=====-====-------------USER MANAGEMENT------------=====-====-=====\n");
                 System.out.println("1. Add User");
                 System.out.println("2. Update User");
                 System.out.println("3. Delete User");
@@ -137,23 +155,32 @@ public class TextUI {
                 {
                 case "1":
                     AddUser();
-                    
+                    TimeUnit.SECONDS.sleep(4);
+                    clrs();
                     break;
               
                 case "2":
                     UpdateUser();
+                    TimeUnit.SECONDS.sleep(4);
+                    clrs();
                     break;
                 
                 case "3":
                    DeleteUser();
+                   TimeUnit.SECONDS.sleep(4);
+                    clrs();
                    break;
                 
                 case "4":
                     AddAdmin();
+                    TimeUnit.SECONDS.sleep(4);
+                    clrs();
                     break;
                 
                 case "5":
                     System.out.println("Exiting to Menu...");
+                    TimeUnit.SECONDS.sleep(4);
+                    clrs();
                     break;
 
                 }
@@ -163,7 +190,7 @@ public class TextUI {
 
     public void AddUser(){
         scan.nextLine();
-        System.out.println("---------====---------ADD USER---------====-------\n");
+        System.out.println("===---------====---------ADD USER---------====-------===\n");
         System.out.print("Enter the First Name of the new user:");
         String fname=scan.nextLine();
 
@@ -194,7 +221,7 @@ public class TextUI {
 
     public void UpdateUser(){
         scan.nextLine();
-        System.out.println("------------------UPDATE USER--------------\n");
+        System.out.println("=====-====------------------UPDATE USER----------------====-====\n");
         System.out.print("Enter the ID number of the User you wish to edit:");
         int id=scan.nextInt();
 
@@ -218,7 +245,7 @@ public class TextUI {
 
     public void DeleteUser(){
         scan.nextLine();
-        System.out.println("------------------DELETE USER--------------\n");
+        System.out.println("=====-=====-====-----------------DELETE USER--------------======-=====-===\n");
         System.out.print("Enter the ID number of the User you wish to delete:");
         int id=scan.nextInt();
 
@@ -241,7 +268,7 @@ public class TextUI {
     
     public void AddAdmin(){
         scan.nextLine();
-        System.out.println("------------------ADD ADMIN--------------\n");
+        System.out.println("-===-----------------ADD ADMIN-------------===-\n");
         System.out.print("\nEnter the Email of the user: ");
         String email=scan.nextLine();
 
@@ -256,7 +283,7 @@ public class TextUI {
         System.out.println("\nNew Admin successfully added to the system!");    
     }
 
-    public void DriverManagement(){
+    public void DriverManagement() throws InterruptedException {
         String choice="";
      
         boolean value=login();
@@ -267,7 +294,7 @@ public class TextUI {
         }
         else{
             while(!choice.equals("5")){
-                System.out.println("\n-------------DRIVER MANAGEMENT------------\n");
+                System.out.println("\n========-=====-====-------------DRIVER MANAGEMENT------------=====-=====-=======\n");
                 System.out.println("1. Add Driver");
                 System.out.println("2. Update Driver");
                 System.out.println("3. Delete Driver");
@@ -280,23 +307,32 @@ public class TextUI {
                 {
                 case "1":
                     AddDriver();
-                    
+                    TimeUnit.SECONDS.sleep(5);
+                    clrs();
                     break;
               
                 case "2":
                     UpdateDriver();
+                    TimeUnit.SECONDS.sleep(6);
+                    clrs();
                     break;
                 
                 case "3":
                    DeleteDriver();
+                   TimeUnit.SECONDS.sleep(5);
+                    clrs();
                    break;
                 
                 case "4":
                     DriverWork();
+                    TimeUnit.SECONDS.sleep(6);
+                    clrs();
                     break;
                 
                 case "5":
                     System.out.println("Exiting to Menu...");
+                    TimeUnit.SECONDS.sleep(4);
+                    clrs();
                     break;
 
                 }
@@ -306,7 +342,7 @@ public class TextUI {
 
     public void AddDriver(){
         scan.nextLine();
-        System.out.println("------------------ADD DRIVER--------------\n");
+        System.out.println("====-====-=====------------------ADD DRIVER----------------==-=====-=====\n");
 
         System.out.print("Enter the Name of the new Driver:");
         String name=scan.nextLine();
@@ -354,7 +390,7 @@ public class TextUI {
         scan.nextLine();
         System.out.println("=====-====-=====-====------------------UPDATE DRIVER-----------------====-=====-=====-====\n");
 
-        System.out.print("Enter the ID number of the User you wish to edit:");
+        System.out.print("Enter the ID number of the Driver you wish to edit:");
         int id=scan.nextInt();
 
         Driver [] drive= Driver.FindDriver(id);
@@ -396,7 +432,7 @@ public class TextUI {
     
     public void DeleteDriver(){
         scan.nextLine();
-        System.out.println("------------------DELETE DRIVER--------------\n");
+        System.out.println("====-====-==------------------DELETE DRIVER---------------=====-=====-====\n");
         System.out.print("Enter the ID number of the Driver you wish to delete:");
         int id=scan.nextInt();
 
@@ -417,7 +453,7 @@ public class TextUI {
         }  
     }
     
-    public void DriverWork(){
+    public void DriverWork() throws InterruptedException {
         int value=loginAdmin();
 
         if (value==0){
@@ -468,7 +504,7 @@ public class TextUI {
         }
     }
 
-    public void ReportManagement(){
+    public void ReportManagement() throws InterruptedException {
         String choice="";
         
         int value=loginAdmin();
@@ -488,13 +524,16 @@ public class TextUI {
 
                 switch(choice)
                 {
-               /* case "1":
-                    AddUser();
-                    
-                    break;*/
+               case "1":
+                    ProfitReport();
+                    TimeUnit.SECONDS.sleep(10);
+                    clrs();
+                    break;
             
                 case "2":
                     WorkReport();
+                    TimeUnit.SECONDS.sleep(10);
+                    clrs();
                     break;
             
                 case "3":
@@ -505,9 +544,57 @@ public class TextUI {
             }
         }
     }
-        
+    
+    public void ProfitReport() throws InterruptedException {
+        int value=loginAdmin();
 
-    public void WorkReport(){
+        if (value==0){
+            System.out.println("\nAccess Denied!");
+        }
+        else{
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
+            Date dateobj = new Date();
+            String date= df.format(dateobj);
+
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t"+date);
+            System.out.println("\n\t\t\t\t\tProfit/Loss Report");
+
+                final String USER= "root";
+                final String PASS="";
+
+                final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+                final String DB_URL = "jdbc:mysql://localhost/kjtrucking"; 
+                Connection conn=null;
+            try{
+                
+                Class.forName(JDBC_DRIVER);
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+                System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t"+date);
+                System.out.println("\n\t\t\t\t\tProft/Loss Report");
+                ReportFormat.printTable(conn, "CALROUTES",50,100);
+
+
+            }catch(SQLException se){
+                //Handle errors for JDBC
+                se.printStackTrace();
+            }catch(Exception e){
+                //Handle errors for Class.forName
+                e.printStackTrace();
+            }finally{
+                //finally block used to close resources
+                // nothing we can do5
+                try{
+                    if(conn!=null)
+                        conn.close();
+                }catch(SQLException se){
+                    se.printStackTrace();
+                }//end finally try
+            }
+        }
+    }
+
+    public void WorkReport() throws InterruptedException {
         int value=loginAdmin();
 
         if (value==0){
@@ -578,7 +665,7 @@ public class TextUI {
         }
 }
 
-public void RouteManagement(){
+public void RouteManagement() throws InterruptedException {
     String choice="";
  
     int value=loginAdmin();
@@ -589,7 +676,7 @@ public void RouteManagement(){
     }
     else{
         while(!choice.equals("5")){
-            System.out.println("\n-------------ROUTE MANAGEMENT------------\n");
+            System.out.println("\n=======-=====-===-------------ROUTE MANAGEMENT-------------=====-======-=====\n");
             System.out.println("1. Add Route");
             System.out.println("2. Update Route");
             System.out.println("3. Delete Route");
@@ -602,23 +689,32 @@ public void RouteManagement(){
             {
             case "1":
                 AddRoute();
-                
+                TimeUnit.SECONDS.sleep(5);
+                clrs();
                 break;
           
             case "2":
                 UpdateRoute();
+                TimeUnit.SECONDS.sleep(6);
+                clrs();
                 break;
             
             case "3":
                DeleteRoute();
+               TimeUnit.SECONDS.sleep(5);
+                clrs();
                break;
             
             case "4":
                CalculateExpenses();
+               TimeUnit.SECONDS.sleep(6);
+                clrs();
                break;
             
             case "5":
                 System.out.println("Exiting to Menu...");
+                TimeUnit.SECONDS.sleep(5);
+                clrs();
                 break;
 
             }
@@ -628,7 +724,7 @@ public void RouteManagement(){
 
 public void AddRoute(){
     scan.nextLine();
-    System.out.println("------------------ADD ROUTE--------------\n");
+    System.out.println("\n====-====-====------------------ADD ROUTE--------------=====-====-===\n");
 
     System.out.print("Enter the name of the company:");
     String company_name=scan.nextLine();
@@ -663,22 +759,23 @@ public void AddRoute(){
 
 public void UpdateRoute(){
     scan.nextLine();
-    System.out.println("------------------UPDATE ROUTE--------------\n");
+    System.out.println("\n=====-=====-===-----------------UPDATE ROUTE--------------====-====-=====\n");
 
     System.out.print("Enter the company name of the route you wish to edit:");
     String company_name=scan.nextLine();
 
     ArrayList<Route>routes= Route.FindCompanyRoute(company_name);
+    String ndestination_name="";
 
     if (routes.get(0)!=null){
-        System.out.println("\n\n--------------------ROUTES INFORMATION-----------------\n");
+        System.out.println("\n\n===-====--------------------ROUTES INFORMATION-----------------===-===\n");
         for (Route i: routes){
             System.out.println(i.toString()+"\n"+"\n");
         }
 
         scan.nextLine();
         System.out.print("\n\nEnter the destination name of the route you wish to update:");
-        String ndestination_name=scan.nextLine();
+        ndestination_name=scan.nextLine();
 
         Route [] r=Route.FindRoute(company_name, ndestination_name);
 
@@ -704,7 +801,7 @@ public void UpdateRoute(){
 
             Route [] nroute1=Route.UpdateRoute(company_name, ndestination_name, nfuel_cost, ndriver_wage, nside_wage, nside_wage2, undelivery_price, nlength_billing);
             
-            System.out.println("\n\n--------------------UPDATED ROUTE'S INFORMATION-----------------\n");
+            System.out.println("\n\n===-===-===--------------------UPDATED ROUTE'S INFORMATION-----------------===-====-===\n");
             Route rt1=nroute1[0];
             System.out.print(rt1.toString());
 
@@ -722,7 +819,7 @@ public void UpdateRoute(){
 
 public void DeleteRoute(){
     scan.nextLine();
-    System.out.println("------------------DELETE ROUTE--------------\n");
+    System.out.println("===-====------------------DELETE ROUTE---------------=====-====\n");
     System.out.print("Enter the company name of the route you wish to delete:");
     String company_name = scan.nextLine();
 
@@ -767,7 +864,7 @@ public void CalculateExpenses(){
 
     Route.AddCalculateExpenses(company_name, destination_name, truck_id, date, profit);
 
-    System.out.println("\n-------CALCULATED EXPENSE---------\n");
+    System.out.println("\n\n===-====-====-------CALCULATED EXPENSE---------====-=====-====\n");
     System.out.print("Date:");
     System.out.print(date);
 
@@ -778,14 +875,151 @@ public void CalculateExpenses(){
     System.out.print(truck_id);
 
     if (profit==0.0){
-        System.out.println("No data provided for route entered!");
+        System.out.println("\nNo data provided for route entered!");
     }else if(profit<0.0){
         System.out.print("\nA Loss is generated:$ ");
         System.out.print(profit);
     }else{
-        System.out.print("A profit is generated of:$");
+        System.out.print("\nA profit is generated of:$");
         System.out.print(profit);
     }
+}
+
+public void TruckManagement() throws InterruptedException{
+    String choice="";
+    boolean value=login();
+
+    if (value==false){
+        System.out.println("Access Denied!");
+        Menu();
+    }else{
+        while(!choice.equals("4")){
+            System.out.println("\n------------- TRUCK MANAGEMENT ------------\n");
+            System.out.println("1. Add Truck");
+            System.out.println("2. Update Truck");
+            System.out.println("3. Delete Truck");
+            System.out.println("4. Exit to Menu");
+            System.out.println("Enter choice:");
+            choice=scan.next();
+
+            switch(choice)
+            {
+            case "1":
+                AddTruckMenu();
+                TimeUnit.SECONDS.sleep(5);
+                clrs();
+                break;
+        
+            case "2":
+                UpdateTruckMenu();
+                TimeUnit.SECONDS.sleep(5);
+                clrs();
+                break;
+            
+            case "3":
+                DeleteTruckMenu();
+                TimeUnit.SECONDS.sleep(5);
+                clrs();
+            break;
+            
+            case "4":
+                System.out.println("Exiting to Menu...");
+                break;
+
+            }
+        }
+    
+    }
+
+
+}
+
+private void DeleteTruckMenu() {
+    scan.nextLine();
+    System.out.println("------------------DELETE TRUCK--------------\n");
+    System.out.print("Enter the ID number of the Truck you wish to delete:");
+    int truckID = scan.nextInt();
+
+    scan.nextLine();
+    System.out.print("Are you sure y/n:");
+    String input=scan.nextLine();
+
+    if (input.equals("y")){
+        int status=DeleteTruck.DelTruck(truckID);
+        if (status==0){
+            System.out.println("\nTruck ID entered does not exist!");
+        }else{
+            System.out.println("\nTruck successfully deleted!");    
+        } 
+    }
+    else{
+        System.out.println("\nReturning to the Menu..");
+    }    
+}
+
+private void UpdateTruckMenu() {
+    scan.nextLine();
+    System.out.println("------------------UPDATE TRUCK--------------\n");
+    System.out.print("Enter the ID number of the Truck you wish to edit:");
+    String newTruckID=scan.nextLine();
+
+    scan.nextLine();
+    System.out.print("\nEnter the new Make of the Truck if applicable else enter the same make:");
+    String newTruckMake=scan.nextLine();
+
+    System.out.print("\nEnter the new Model of the Truck if applicable else enter the same model: ");
+    String newTruckmodel=scan.nextLine();
+
+    System.out.print("\nEnter the new License Plate Number of the Truck if applicable else enter the same number : ");
+    String newTruckLiscence=scan.nextLine();
+
+    System.out.print("\nEnter the new Fitness Expiration of the Truck: ");
+    String newtruckFitness=scan.nextLine();
+
+    System.out.print("\nEnter the new Registration Expiration of the Truck: ");
+    String newTruckReg=scan.nextLine(); 
+
+    System.out.print("\nEnter the new Insurance Expiration of the Truck: ");
+    String newTruckIns=scan.nextLine();
+
+
+    UpdateTruck.UpdateTruckInfo(newTruckID, newTruckMake, newTruckmodel, newTruckLiscence, newtruckFitness, newTruckReg, newTruckIns);
+
+    System.out.println("\nTruck successfully updated!");    
+
+}
+
+public void AddTruckMenu() {
+    scan.nextLine();
+    System.out.println("------------------ADD TRUCK--------------\n");
+    System.out.print("Enter the ID of the truck:");
+    int truckID=scan.nextInt();
+
+    scan.nextLine();
+    System.out.print("\nEnter the Make of the Truck:");
+    String make=scan.nextLine();
+
+    System.out.print("\nEnter the Model of the Truck: ");
+    String model=scan.nextLine();
+
+    System.out.print("\nEnter the Liscence Plate number of the Truck: ");
+    String liscence=scan.nextLine();
+
+    System.out.print("\nEnter the Expiration of the Fitness of the Truck: ");
+    String fitnessexpires=scan.nextLine();
+
+    System.out.print("\nEnter the Expiration of the Registration of the Truck: ");
+    String regexpires=scan.nextLine();
+
+    System.out.print("\nEnter the Expiration of the Insurance of the Truck: ");
+    String insureanceexpires=scan.nextLine();
+
+    scan.nextLine();
+    
+    Truck truck1=new Truck(truckID,make,model,liscence,fitnessexpires,regexpires, insureanceexpires);
+    AddTruck.AddTruckInfo(truck1);
+
+    System.out.println("\nTruck successfully added to the system!");    
 }
 }
 
