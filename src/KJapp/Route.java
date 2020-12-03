@@ -217,7 +217,7 @@ public class Route {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
                 //mysql insert statement
-                String sql3 ="INSERT INTO ROUTES VALUES (?,?,?,?,?,?,?)";
+                String sql3 ="INSERT INTO ROUTES VALUES (?,?,?,?,?,?,?,?)";
                 //code to create mysql insert preparedstatement
                 PreparedStatement preparedStmt = conn.prepareStatement(sql3);
               
@@ -333,7 +333,7 @@ public class Route {
             stmt = conn.createStatement();
         
 
-            String query = "SELECT * FROM ROUTE WHERE company_name =?";
+            String query = "SELECT * FROM ROUTES WHERE company_name =?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1,company_name);
             ResultSet result=pStmt.executeQuery();
@@ -398,7 +398,7 @@ public class Route {
             stmt = conn.createStatement();
             
 
-            String sql3="Update ROUTES set fuel_cost=?, driver_wage=?, side_wage= ?,  side_wage2=?, delivery_price= ?,length_billing= ? Where comany_name=? and destination_name=?";
+            String sql3="Update ROUTES set fuel_cost=?, driver_wage=?, side_wage= ?,  side_wage2=?, delivery_price= ?,billing_cycle= ? Where company_name=? and destination_name=?";
             PreparedStatement preparedStmt = conn.prepareStatement(sql3);
 
             preparedStmt.setDouble(1, fuel_cost);
@@ -413,10 +413,10 @@ public class Route {
 
             preparedStmt.executeUpdate();
 
-            String sql="SELECT * FROM ROUTES WHERE company_name =? and destination_name=?";
+            String sql="SELECT * FROM ROUTES WHERE company_name =? and destination_name= ?";
             PreparedStatement ps= conn.prepareStatement(sql);
             ps.setString(1, company_name);
-            preparedStmt.setString(2, destination_name);
+            ps.setString(2, destination_name);
             ResultSet result= ps.executeQuery();
 
             while(result.next()){
@@ -477,7 +477,7 @@ public class Route {
             
 
 
-            String sql3="DELETE FROM ROUTES VALUES where company_name = ? and destination_name=?";
+            String sql3="DELETE FROM ROUTES Where company_name = ? and destination_name=?";
 
             PreparedStatement preparedStmt = conn.prepareStatement(sql3);
             
